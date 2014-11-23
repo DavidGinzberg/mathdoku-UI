@@ -6,7 +6,7 @@ function buildNxNGrid(n){
 }
 
 function getNumberInput(){
-    inVal = $("#puzzleDimInput").value()
+    inVal = $("#puzzleDimInput").val()
     if (inVal > 0 && inVal <= 10){
         return inVal;
     }
