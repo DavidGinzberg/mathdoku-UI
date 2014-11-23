@@ -6,10 +6,10 @@
     <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
   </head>
   <body>
-  <input type="text" id="puzzleDimInput" /><!-- the size of the puzzle. Should probably limit this. -->
+  <input type="number" id="puzzleDimInput" min="0" max="10" defaultValue="4" /><!-- the size of the puzzle. Should probably limit this. -->
   <button type="button" id="theButton" >Push</button><!-- Click this button to generate the puzzle grid-->
   
-  <div id="puzzlecontainer"><!-- Generate the puzzle in here--></div>
+  <div id="puzzleContainer"><!-- Generate the puzzle in here--></div>
   
   <script src="JS/core.js"></script>
   </body>
