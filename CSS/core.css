@@ -1,3 +1,15 @@
+#puzzleGrid {
+border-collapse: collapse;
+}
+
+#puzzleGrid > tbody {
+border: 2px solid black;
+}
+
+#puzzleGrid * td {
+border: 1px solid gray;
+}
+
 .active{
     background-color: yellow;
 }
