@@ -9,12 +9,31 @@ function buildNxNGrid(n){
             var thisId = "cell-" + i + "-" + j;
             thisRow.append($("<td/>")
                    .attr("id", thisId)
+                   .addClass("puzzleCell")
+                   .data("row", i)
+                   .data("col", j)
                    .html(thisId));
         }
         theTable.append(thisRow);
     }
     $("#puzzleContainer").html(theTable);
-    console.warn("Not implemented yet:\tfunction buildNxNGrid()");
+}
+
+function setActiveCell(cell){
+    cell.addClass("active");
+}
+
+function removeActiveCell(cell){
+    cell.removeClass("active");
+}
+/* This binds the behavior for navigating around the puzzle with a keyboard.
+ * Because there are no puzzle cells at document.ready, this should be done
+ * with delegate bindings on #puzzleContainer
+ */
+function bindPuzzleCells(){
+    $("#puzzleContainer").on("keypress", ".puzzleCell", function(event){
+        console.warn("Keyboard navigation not implemented yet.");
+    });
 }
 
 function getNumberInput(){
@@ -33,4 +52,5 @@ function bindButton(){
 
 $(document).ready( function(){
     bindButton();
+    bindPuzzleCells();
 });
