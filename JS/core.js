@@ -1,3 +1,12 @@
+function focusFirstCell(){
+    console.log("focusFirstCell() called");
+    
+    $($(this).find(".puzzleCell")
+        .removeClass("active")[0]).focus();
+    
+    //$("#cell-0-0").focus();
+}
+
 function buildNxNGrid(n){
     if(n < 1){
         console.error("Warning: Bad grid size:\t" + n);
@@ -9,6 +18,7 @@ function buildNxNGrid(n){
             var thisId = "cell-" + i + "-" + j;
             thisRow.append($("<td/>")
                    .attr("id", thisId)
+                   .attr("tabindex", "0")
                    .addClass("puzzleCell")
                    .data("row", i)
                    .data("col", j)
@@ -17,10 +27,11 @@ function buildNxNGrid(n){
         theTable.append(thisRow);
     }
     $("#puzzleContainer").html(theTable);
+    theTable.attr("tabindex", "0");
 }
 
-function setActiveCell(cell){
-    cell.addClass("active");
+function setActiveCell(event){
+    $(event.target).addClass("active");
 }
 
 function removeActiveCell(cell){
@@ -33,7 +44,8 @@ function removeActiveCell(cell){
 function bindPuzzleCells(){
     $("#puzzleContainer").on("keypress", ".puzzleCell", function(event){
         console.warn("Keyboard navigation not implemented yet.");
-    });
+    })
+    .on("activate", ".puzzleCell", setActiveCell);
 }
 
 function getNumberInput(){
@@ -53,4 +65,14 @@ function bindButton(){
 $(document).ready( function(){
     bindButton();
     bindPuzzleCells();
+    
+    $("#puzzleContainer").on("focusin",
+                             ".puzzleCell",
+                             function (event){
+                                setActiveCell(event);
+                                event.stopPropagation();
+                                event.preventDefault();
+                                return false;
+                             });
+    $("#puzzleContainer").on("focusin", "#puzzleGrid", focusFirstCell);
 });
